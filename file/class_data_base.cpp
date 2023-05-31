@@ -163,7 +163,7 @@ class DB_update: public Data_base
         }
 
 
-        std::string sql = "UPDATE DAILY_PLANNER set 'TEXT' = '"std::string(txt) +"', 'IMPORTANT' = " + std::string(flag) + "' WHERE 'ID' = '"+std::string(static_cast<long long>(x))+"';";
+          std::string sql = "UPDATE DAILY_PLANNER SET TEXT = '"+ std::string(txt) +"', IMPORTANT = '" + flag + "' WHERE ID = '" + std::to_string(static_cast<long long>(x)) + "';";
 
         exit = sqlite3_exec(DB, sql.c_str(), Data_base::callback, NULL, NULL);
         if(exit != SQLITE_OK)
@@ -177,4 +177,45 @@ class DB_update: public Data_base
             std::cerr<<"Operation ok "<<std::endl;
             sqlite3_close(DB);
         }
+    }
+};
+
+class DB_delete: public Data_base
+{
+    public:
+         void delete_event()
+    {
+        int x;
+        std::cout<<"Введите ID события: ";
+        std::cin>>x;
+
+        sqlite3* DB;
+        char* messagges_error;
+        int exit = sqlite3_open("daily_planner_data_base.db", &DB);
+
+        if (exit)
+        {
+            std::cerr << "Error open DB " << sqlite3_errmsg(DB) << std::endl;
+        }
+        else
+        {
+            std::cout << "Opened Database Successfully!" << std::endl;
+        }
+
+
+          std::string sql = "DELETE FROM DAILY_PLANNER WHERE ID = '" + std::to_string(static_cast<long long>(x)) + "';";
+
+        exit = sqlite3_exec(DB, sql.c_str(), Data_base::callback, NULL, NULL);
+        if(exit != SQLITE_OK)
+        {
+            std::cerr<<"Error DELETE: "<<sqlite3_errmsg(DB)<<std::endl;
+            sqlite3_free(messagges_error);
+
+        }
+        else
+        {
+            std::cerr<<"Operation ok "<<std::endl;
+            sqlite3_close(DB);
+        }
+    }
 };
