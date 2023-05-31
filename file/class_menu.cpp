@@ -25,17 +25,21 @@ class Menu_action
                 break;
             case 2:
                 DB_select var4;
-                var4.select_event();
+                var4.select_event_all();
                 break;
             case 3:
-                DB_update var5;
-                var5.update_event();
+                DB_select var5;
+                var5.select_event();
                 break;
             case 4:
-                DB_delete var6;
-                var6.delete_event();
+                DB_update var6;
+                var6.update_event();
                 break;
             case 5:
+                DB_delete var7;
+                var7.delete_event();
+                break;
+            case 6:
                 exit(1);
             default: std::cout<<"Неверное действие!"<<std::endl;
         }
@@ -92,10 +96,11 @@ public:
                 std::cout<<"\n";
                 std::cout<<"Вас приветствует ежедневник!"<<std::endl;
                 std::cout<<"1.Создать событие"<<std::endl;
-                std::cout<<"2.Просмотреть события"<<std::endl;
-                std::cout<<"3.Редактировать событие"<<std::endl;
-                std::cout<<"4.Удалить событие"<<std::endl;
-                std::cout<<"5.Выход"<<std::endl;
+                std::cout<<"2.Просмотреть все события"<<std::endl;
+                std::cout<<"3.Просмотреть событие"<<std::endl;
+                std::cout<<"4.Редактировать событие"<<std::endl;
+                std::cout<<"5.Удалить событие"<<std::endl;
+                std::cout<<"6.Выход"<<std::endl;
                 for(int i = 0; i<=30; i++)
                 {
                     std::cout<<"*";
@@ -114,10 +119,11 @@ public:
                 std::cout<<"\n";
                 std::cout<<"Вас приветствует ежедневник!"<<std::endl;
                 std::cout<<"1.Создать событие"<<std::endl;
-                std::cout<<"2.Просмотреть события"<<std::endl;
-                std::cout<<"3.Редактировать событие"<<std::endl;
-                std::cout<<"4.Удалить событие"<<std::endl;
-                std::cout<<"5.Выход"<<std::endl;
+                std::cout<<"2.Просмотреть все события"<<std::endl;
+                std::cout<<"3.Просмотреть событие"<<std::endl;
+                std::cout<<"4.Редактировать событие"<<std::endl;
+                std::cout<<"5.Удалить событие"<<std::endl;
+                std::cout<<"6.Выход"<<std::endl;
               //  std::cout<<"99.Создать базу программы (обязательно и единократно при первом запуске!)"<<std::endl;
 
                 for(int i = 0; i<=30; i++)
@@ -131,4 +137,3 @@ public:
     }
 
 };
-
