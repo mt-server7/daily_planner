@@ -100,7 +100,7 @@ class DB_select: public Data_base
 {
     public:
 
-    void select_event()
+    void select_event_all()
     {
         sqlite3* DB;
         char* messagges_error;
@@ -108,6 +108,43 @@ class DB_select: public Data_base
         std::string data("Событие");
 
         std::string sql("SELECT * FROM DAILY_PLANNER;");
+
+         if (exit)
+        {
+            std::cerr << "Error open DB " << sqlite3_errmsg(DB) << std::endl;
+        }
+        else
+        {
+            std::cout << "Opened Database Successfully!" << std::endl;
+        }
+
+       exit = sqlite3_exec(DB, sql.c_str(), Data_base::callback, (void*)data.c_str(), NULL);
+            if(exit != SQLITE_OK)
+            {
+                std::cerr<<"Error SELECT: "<<sqlite3_errmsg(DB)<<std::endl;
+                sqlite3_free(messagges_error);
+
+            }
+            else
+            {
+                std::cerr<<"Operation ok "<<std::endl;
+            sqlite3_close(DB);
+            }
+
+    }
+    
+    void select_event()
+    {
+
+        int x;
+        std::cout<<"Введите ID события: ";
+        std::cin>>x;
+        sqlite3* DB;
+        char* messagges_error;
+        int exit = sqlite3_open("daily_planner_data_base.db", &DB);
+        std::string data("Событие");
+
+        std::string sql("SELECT * FROM DAILY_PLANNER WHERE ID = '"+std::to_string(static_cast<long long>(x))+"';");
 
          if (exit)
         {
